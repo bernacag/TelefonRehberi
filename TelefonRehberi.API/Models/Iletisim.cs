@@ -14,7 +14,7 @@ namespace TelefonRehberi.API.Models
     }
 
     [Table("Iletisim")]
-    public class Iletisim
+    public class Iletisim : BaseModel
     {
         public BilgiTip BilgiTipi { get; set; }
 
