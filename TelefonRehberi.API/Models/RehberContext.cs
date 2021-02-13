@@ -8,6 +8,10 @@ namespace TelefonRehberi.API.Models
 {
     public class RehberContext : DbContext
     {
+        public RehberContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<Kisi> Kisi { get; set; }
 
         public DbSet<Iletisim> Iletisim { get; set; }

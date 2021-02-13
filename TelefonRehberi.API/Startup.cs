@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TelefonRehberi.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TelefonRehberi.API
 {
@@ -26,6 +28,10 @@ namespace TelefonRehberi.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<RehberContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("RehberContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
