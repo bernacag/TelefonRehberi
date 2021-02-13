@@ -9,6 +9,10 @@ namespace TelefonRehberi.API.Models
     {
         public int Id { get; set; }
 
+        public DateTime? EklenmeTarihi { get; set; }
+
+        public DateTime? GuncellenmeTarihi { get; set; }
+
         public bool SilindiMi { get; set; }
     }
 }
