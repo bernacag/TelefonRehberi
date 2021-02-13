@@ -14,11 +14,12 @@ namespace TelefonRehberi.API.Models
 
     public class Iletisim
     {
-        public int Id { get; set; }
-
         public BilgiTip BilgiTipi { get; set; }
 
         public string BilgiIcerigi { get; set; }
 
+        public int KisiId { get; set; }
+
+        public Kisi Kisi { get; set; }
     }
 }
