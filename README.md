@@ -1,12 +1,14 @@
 # Telefon Rehberi API
-
+This project was made to keep contacts in the phone book.
+It lists by creating a contact, deleting a contact, contact location, contact information about the person and the location of the people.
+Telephone, e-mail, location information were entered as Information Type.
+Enum type; 0=telephone, 1=e-mail, 2=location.
 
 # Getting Started
-Use these instructions to get the project up and running.
+
 
 Prerequisites
 You will need the following tools:
-
 Visual Studio 2019
 .Net Core 3.1
 EF Core 3.1
