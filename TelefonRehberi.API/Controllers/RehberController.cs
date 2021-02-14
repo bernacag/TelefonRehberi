@@ -81,9 +81,10 @@ namespace TelefonRehberi.API.Controllers
             {
                 return NotFound();
             }
+
+            kisi.SilindiMi = true;
+
             await KisiGuncelle(id, kisi);
-            //kisi.SilindiMi = true;
-            //await _context.SaveChangesAsync();
 
             return NoContent();
         }
