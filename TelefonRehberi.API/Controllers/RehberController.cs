@@ -27,7 +27,7 @@ namespace TelefonRehberi.API.Controllers
         {
             return await _context.Kisi.ToListAsync();
         }
-           
+
         // GET: api/Rehber/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Kisi>> Kisi(int id)
@@ -97,7 +97,7 @@ namespace TelefonRehberi.API.Controllers
             _context.Kisi.Add(kisi);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetKisi", new { id = kisi.Id }, kisi);
+            return CreatedAtAction("Kisi", new { id = kisi.Id }, kisi);
         }
 
         // DELETE: api/Rehber/5
@@ -162,6 +162,43 @@ namespace TelefonRehberi.API.Controllers
             }
 
             return NoContent();
+        }
+
+        // POST: api/IletisimEkle/5
+        [HttpPost(Name = nameof(IletisimKaldir))]
+        public async Task<IActionResult> IletisimKaldir(int kisiId, int iletisimId)
+        {
+            var kisi = await _context.Kisi.Where(x => x.Id == kisiId).Include(x => x.Iletisimler).FirstOrDefaultAsync();
+            if (kisi == null)
+            {
+                return NotFound();
+            }
+            kisi.Iletisimler.FirstOrDefault(x => x.Id == iletisimId).SilindiMi = true;
+            kisi.Iletisimler.FirstOrDefault(x => x.Id == iletisimId).GuncellenmeTarihi = DateTime.Now;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+            }
+
+            return NoContent();
+        }
+
+        [HttpGet("{konum}", Name = nameof(KonumKisiler))]
+        public async Task<ActionResult<IEnumerable<Kisi>>> KonumKisiler(string konum)
+        {
+            var kisiler = await _context.Iletisim.Where(x => x.BilgiIcerigi == konum).Select(x => x.Kisi).ToListAsync();
+
+            if (kisiler == null)
+            {
+                return NotFound();
+            }
+
+            return kisiler;
         }
 
 
