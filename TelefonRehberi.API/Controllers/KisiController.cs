@@ -9,8 +9,8 @@ using TelefonRehberi.API.Models;
 
 namespace TelefonRehberi.API.Controllers
 {
-    [ApiController]
-    [Route("[controller]/[action]")]
+    //[ApiController]
+    //[Route("[controller]/[action]")]
     public class KisiController : Controller
     {
         private readonly RehberContext _context;
@@ -46,22 +46,22 @@ namespace TelefonRehberi.API.Controllers
             return View(kisi);
         }
 
-        // GET: Kisi/Create
+        // GET: Kisi/Ekle
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Ekle()
         {
             return View();
         }
 
-        // POST: Kisi/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Kisi/Ekle
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UUID,Ad,Soyad,Firma,Id,SilindiMi")] Kisi kisi)
+        public async Task<IActionResult> Ekle([Bind("UUID,Ad,Soyad,Firma,Id,SilindiMi")] Kisi kisi)
         {
             if (ModelState.IsValid)
             {
+                kisi.EklenmeTarihi = DateTime.Now;
+                kisi.SilindiMi = false;
                 _context.Add(kisi);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -69,9 +69,9 @@ namespace TelefonRehberi.API.Controllers
             return View(kisi);
         }
 
-        // GET: Kisi/Edit/5
+        // GET: Kisi/Guncelle/5
         [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Guncelle(int? id)
         {
             if (id == null)
             {
@@ -86,12 +86,10 @@ namespace TelefonRehberi.API.Controllers
             return View(kisi);
         }
 
-        // POST: Kisi/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Kisi/Guncelle/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UUID,Ad,Soyad,Firma,Id,SilindiMi")] Kisi kisi)
+        public async Task<IActionResult> Guncelle(int id, [Bind("UUID,Ad,Soyad,Firma,Id,SilindiMi")] Kisi kisi)
         {
             if (id != kisi.Id)
             {
@@ -102,6 +100,7 @@ namespace TelefonRehberi.API.Controllers
             {
                 try
                 {
+                    kisi.GuncellenmeTarihi = DateTime.Now;
                     _context.Update(kisi);
                     await _context.SaveChangesAsync();
                 }
@@ -121,9 +120,9 @@ namespace TelefonRehberi.API.Controllers
             return View(kisi);
         }
 
-        // GET: Kisi/Delete/5
+        // GET: Kisi/Sil/5
         [HttpGet]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Sil(int? id)
         {
             if (id == null)
             {
@@ -140,8 +139,8 @@ namespace TelefonRehberi.API.Controllers
             return View(kisi);
         }
 
-        // POST: Kisi/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Kisi/Sil/5
+        [HttpPost, ActionName("Sil")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
