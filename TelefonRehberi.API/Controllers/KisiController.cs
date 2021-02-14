@@ -9,6 +9,8 @@ using TelefonRehberi.API.Models;
 
 namespace TelefonRehberi.API.Controllers
 {
+    [ApiController]
+    [Route("[controller]/[action]")]
     public class KisiController : Controller
     {
         private readonly RehberContext _context;
@@ -19,12 +21,14 @@ namespace TelefonRehberi.API.Controllers
         }
 
         // GET: Kisi
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Kisi.ToListAsync());
         }
 
         // GET: Kisi/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +47,7 @@ namespace TelefonRehberi.API.Controllers
         }
 
         // GET: Kisi/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -65,6 +70,7 @@ namespace TelefonRehberi.API.Controllers
         }
 
         // GET: Kisi/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,6 +122,7 @@ namespace TelefonRehberi.API.Controllers
         }
 
         // GET: Kisi/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
